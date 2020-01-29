@@ -14,10 +14,14 @@ function Decks(props) {
       .then(response => setDecks(response))
       .catch(() => props.history.push("/"));
   })
+
+  const toRender = (
+    <img src={decks.length > 0 ? decks[0]['image_url'] : ""} />
+  )
   
   return (
     <div className="col-md-6 col-lg-4">
-      <img src={decks.length > 0 ? decks[0]['imageUrl'] : "Loading..."} />
+      {decks.length > 0 ? toRender : "Loading..."}
     </div>
   );
 }

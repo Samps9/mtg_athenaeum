@@ -1,5 +1,5 @@
 class Api::V1::DecksController < ApplicationController
   def index
-    render json: [MTG::Card.find(386616)]
+    render json: Card.all
   end
 end
