@@ -4,11 +4,7 @@ Rails.application.routes.draw do
       get 'cards/search/*query', to: 'cards#search'
     end
   end
-  namespace :api do 
-    namespace :v1 do
-      get 'decks/index'
-    end
-  end
+  
   devise_for :users
   root 'home#index'
   get '/*path' => 'home#index'
