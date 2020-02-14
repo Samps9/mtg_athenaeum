@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2020_02_12_205254) do
     t.string "mana_cost"
     t.integer "cmc"
     t.string "layout"
-    t.string "type"
+    t.string "card_type"
     t.string "text"
     t.string "flavor"
     t.string "power"
@@ -31,8 +31,8 @@ ActiveRecord::Schema.define(version: 2020_02_12_205254) do
     t.string "rarity"
     t.string "set_code"
     t.string "set_name"
-    t.binary "mtg_id"
-    t.integer "multiverseid"
+    t.string "mtg_id"
+    t.integer "multiverse_id"
   end
 
   create_table "deck_cards", force: :cascade do |t|

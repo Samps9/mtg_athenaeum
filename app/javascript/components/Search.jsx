@@ -7,7 +7,8 @@ class Search extends React.Component {
     this.state = {
       isLoading: false,
       searchResults: [],
-      searchTerm: ''
+      searchTerm: '',
+      selectedCard: null
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -40,9 +41,9 @@ class Search extends React.Component {
   render() {
     
     const results = this.state.searchResults.map(
-      (cardData, index) => (
-        <Card key = {index} data = {cardData} />
-      )
+        (cardData, index) => (
+          <Card key = {index} data = {cardData} />
+        )
     );
 
     const spinner = (
@@ -52,7 +53,7 @@ class Search extends React.Component {
       </div>
     );
 
-    const greeting = <div className="text-center mt-5">Welcome to the MTG Athenaeum!</div>
+    const greeting = <div className="text-center mt-5">Welcome to the MTG Athenaeum!</div>  
 
     return (
       <>
@@ -70,9 +71,9 @@ class Search extends React.Component {
             
           </div>
         </form>
-
+        
         {this.state.searchResults.length > 0  ? results : this.state.isLoading ? spinner : greeting}
-         
+      
       </>
     );
   }

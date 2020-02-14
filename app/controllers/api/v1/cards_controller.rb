@@ -1,5 +1,5 @@
 class Api::V1::CardsController < ApplicationController
   def search
-    render json: MTG::Card.where(name: params[:query]).all
+    render json: Card.where('name LIKE ?', "%#{params[:query]}%")
   end
 end
