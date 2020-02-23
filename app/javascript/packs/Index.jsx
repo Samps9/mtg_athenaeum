@@ -10,8 +10,11 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import App from "../components/App";
 
 document.addEventListener('DOMContentLoaded', () => {
+  let mainContainer = document.createElement('div');
+  mainContainer.classList.add('main');
+  
   render(
     <App />,
-    document.body.appendChild(document.createElement('div'))
+    document.body.appendChild(mainContainer)
   );
 });

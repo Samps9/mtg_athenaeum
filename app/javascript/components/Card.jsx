@@ -2,8 +2,14 @@ import React from 'react';
 
 function Card(props) {
   const imageUrl = props.data.image_url;
+
   const modalId = "search-card-modal-" + props.data.multiverse_id;
   const modalDataTarget = "#" + modalId;
+  const modalCardText = typeof props.data.text === "string" && props.data.text.length > 0 ? props.data.text.split("\n").map(
+    (text, index) => (
+      <p key = {index}>{text}</p>
+    )
+  ) : null;
 
   const searchCard = (
     <div className="d-inline-flex card search-card m-2">
@@ -21,28 +27,23 @@ function Card(props) {
   );
 
   const cardModal = (
-      <div className="modal fade" id={modalId} tabIndex="-1" role="dialog" aria-hidden="true">
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title">{props.data.name}</h5>
-              <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div className="modal-body">
-              {props.data.text}
-            </div>
-            <div className="modal-footer">
-              <button type="button" className="btn btn-outline-dark">Card Text</button>
-              <button type="button" className="btn btn-outline-dark">Rulings</button>
-              <button type="button" className="btn btn-outline-dark">Legalities</button>
-              <button type="button" className="btn btn-outline-dark">Set</button>
-            </div>
+    <div className="modal fade" id={modalId} tabIndex="-1" role="dialog" aria-hidden="true">
+      <div className="modal-dialog" role="document">
+        <div className="modal-content">
+          <div className="modal-header">
+            <h5 className="modal-title">{props.data.name}</h5>
+            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div className="modal-body">
+            <h6>Card Text</h6>
+            {modalCardText}
           </div>
         </div>
       </div>
-    );
+    </div>
+  );
 
 
   return (
