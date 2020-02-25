@@ -5,6 +5,7 @@ class Search extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      emptySearchTerm: '',
       isLoading: false,
       resultsFound: false,
       searchResults: [],
@@ -35,7 +36,16 @@ class Search extends React.Component {
       }
       throw new Error("Bad response :(");
     })
-    .then(response => this.setState({searchResults: response}));
+    .then(response => this.setState({searchResults: response}))
+    // if there are no actual cards in the search results, set emptySearchTerm to the current searchTerm
+    // I would do this in componentDidUpdate but we really only want it to happen after a submit
+    .then(
+      () => {
+        if(this.state.searchResults[0] === "No results found") {
+          this.setState({emptySearchTerm: this.state.searchTerm})
+        }
+      }
+    );
   }
 
   componentDidUpdate() {
@@ -46,7 +56,7 @@ class Search extends React.Component {
     // if there are actual cards in search results, set resultsFound to true
     if (this.resultsQOL() && this.state.searchResults[0] !== "No results found" && !this.state.resultsFound) {
       this.setState({resultsFound: true});
-    }
+    } 
   }
 
   render() {
@@ -66,8 +76,8 @@ class Search extends React.Component {
 
     const greeting = <div className="text-center mt-5">Welcome to the MTG Athenaeum!</div>;
 
-    const noResults = <div className="text-center mt-5">No results found for "{`${this.state.searchTerm}`}"</div>;
-
+    const noResults = <div className="text-center mt-5">No cards found with "{`${this.state.emptySearchTerm}`}" in the name</div>;
+    
     return (
       <>
         <div className="search-container">
@@ -85,10 +95,21 @@ class Search extends React.Component {
             </div>
           </form>
           
-          {this.resultsQOL() && this.state.resultsFound ? 
-            results : this.state.isLoading ? 
-              spinner : this.resultsQOL() && this.state.searchResults[0] === "No results found" ? 
-                noResults : greeting}
+          {/*Logic to handle what to render at any given point in the story of a user making searches */}
+          {(
+            () => {
+              if(this.resultsQOL() && this.state.resultsFound) {
+                return results
+              } else if(this.state.isLoading) {
+                return spinner
+              } else if(this.resultsQOL() && this.state.searchResults[0] === "No results found") {
+                return noResults
+              } else {
+                return greeting
+              }
+            }
+          )()}
+
         </div>
     </>
     );
