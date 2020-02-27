@@ -16,7 +16,6 @@ ActiveRecord::Base.transaction do
     card = Card.new(name: data.name.downcase, multiverse_id: data.multiverse_id, image_url: data.image_url) 
 
     card.mtg_id = data.id if data.id.present?
-    card.multiverse_id = data.multiverse_id if data.multiverse_id.present?
     card.layout = data.layout if data.layout.present?
     card.mana_cost = data.mana_cost if data.mana_cost.present?
     card.cmc = data.cmc.to_i if data.cmc.present?
