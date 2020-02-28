@@ -1,5 +1,8 @@
 import React from 'react';
-import Card from './Card';
+import Card from '../cards/Card';
+import Greeting from './Greeting';
+import Spinner from './Spinner';
+import NoResults from './NoResults';
 
 class Search extends React.Component {
   constructor(props) {
@@ -60,6 +63,10 @@ class Search extends React.Component {
   }
 
   render() {
+
+    const greeting = <Greeting />;
+
+    const spinner = <Spinner  searchTerm = {this.state.searchTerm} />;
     
     const results = this.state.searchResults.map(
         (cardData, index) => (
@@ -67,21 +74,11 @@ class Search extends React.Component {
         )
     );
 
-    const spinner = (
-      <div className="search-loading text-center mt-5">
-        <i className="fa fa-spinner"></i>
-        <p>Loading cards with "{`${this.state.searchTerm}`}" in the name...</p>
-      </div>
-    );
-
-    const greeting = <div className="text-center mt-5">Welcome to the MTG Athenaeum!</div>;
-
-    const noResults = <div className="text-center mt-5">No cards found with "{`${this.state.emptySearchTerm}`}" in the name</div>;
-    
+    const noResults = <NoResults emptySearchTerm = {this.state.emptySearchTerm} />;
     return (
       <>
         <div className="search-container">
-          <form onSubmit={this.handleSubmit} className="my-2">
+          <form onSubmit={this.handleSubmit} className="my-2" autoComplete="off">
             <div className="form-row">
               <div className="col-9">
                 <input value={this.state.searchTerm} onChange={this.handleChange} className="form-control ml-2 mr-2" type="text" placeholder="Search for cards by name" aria-label="Search" />
