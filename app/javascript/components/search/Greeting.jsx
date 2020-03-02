@@ -12,7 +12,7 @@ function Greeting() {
 
   const toRender = suggestedTerms.map(
     (term, index) => (
-      <code className="suggested-search-term" key={index}>{term}</code>            
+      <code className="suggested-search-term" key={index}>{term}</code>
     )
   )
 
