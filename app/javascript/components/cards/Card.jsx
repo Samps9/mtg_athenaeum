@@ -11,11 +11,8 @@ function Card(props) {
       <img src={imageUrl} className="img-fluid card-img-top p-2"/>
       <hr className="divider"/>
       <div  className="card-body p-2">
-        <button className="btn btn-outline-dark" data-toggle="modal" data-target={modalDataTarget}>
+        <button className="btn btn-outline-dark float-right mr-2" data-toggle="modal" data-target={modalDataTarget}>
           <i className="fa fa-bars"></i>
-        </button>
-        <button className="btn btn-outline-dark float-right">
-          <i className="fa fa-plus"></i>
         </button>
       </div>
     </div>
